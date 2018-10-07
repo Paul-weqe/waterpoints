@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
+    <h3>{{ waterpoint_data["name"] }}</h3>
+    <!--The div element for the map -->
+    <div id="map"></div>
+    <script>
+
+
+    // Initialize and add the map
+
+    var coordinates = {{waterpoint_data|tojson}};
+
+    if ('lat' in coordinates && 'lon' in coordinates){
+      function initMap() {
+        // The location of Uluru
+        var center = {lat: coordinates['lat'], lng: coordinates['lon']};
+        // The map, centered at Uluru
+
+        var map = new google.maps.Map(
+          document.getElementById('map'), {zoom: 8, center: center});
+          // The marker, positioned at Uluru
+          // var position = {lat: coordinates['lat'], lng: coordinates['lon']};
+          var marker = new google.maps.Marker({position: center, map: map});
+        }
+      }
+    </script>
+
+    <!--Load the API from the specified URL
+    * The async attribute allows the browser to render the page while the API loads
+    * The key parameter will contain your own API key (which is not needed for this tutorial)
+    * The callback parameter executes the initMap() function
+    -->
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-Rm0pvzc0Z5fgSTrrb8mM5p23fPHaVHA&callback=initMap">
+    </script>
+
+    <br>
+    <h2>New</h2>
+
+    <!-- gets and displays the cost attached to the specific waterpoint -->
+    <canvas id="chart" width="600", height=400></canvas>
+    <script>
+
+      var waterpoint = {{waterpoint_data|tojson}};
+      if ('waterpointCost' in waterpoint){
+        var barData = {
+          labels : [
+            {% for cost_type in waterpoint_data['waterpointCost'] %}
+              {% if cost_type != "id" and cost_type != "date" %}
+                "{{ cost_type }}",
+              {% endif %}
+            {% endfor %}
+          ],
+
+          datasets: [{
+            fillColor: "rgba(151, 187, 205, 0.2)",
+            strokeColor: "rgba(151, 187, 205, 1)",
+            pointColor: "rgba(151, 187, 205, 1)",
+            data: [
+              {% for cost_type in waterpoint_data['waterpointCost'] %}
+                {% if cost_type != "id" and cost_type != "date" %}
+                  "{{ waterpoint_data['waterpointCost'][cost_type] }}",
+                {% endif %}
+              {% endfor %}
+            ]
+          }],
+        };
+
+        var costChart = document.getElementById("chart").getContext("2d");
+
+        steps = 5;
+        max = 50;
+
+
+        // draw chart
+        new Chart(costChart).Bar(barData, {
+          scaleOverride: true,
+          scaleSteps: steps,
+          scaleStepWidth: Math.ceil(max/steps),
+          scaleStartValue: 0,
+          scaleShowVerticalLines: true,
+          scaleShowGridLines: true,
+          barShowStroke: true,
+          scaleShowLabels: true
+        });
+
+       }
+
+
+    </script>
+
+    <!-- draw a pie chart of how the usage of water is in the waterpoint -->
+    <canvas id="pie-chart" width="600" height="400"></canvas>
+    <script>
+      var waterpoint = {{waterpoint_data|tojson}};
+
+      if ('waterpointUsage' in waterpoint){
+
+        var pieData = {
+          labels: [
+            {% for usage_type in waterpoint_data['waterpointUsage'] %}
+              {% if usage_type != 'id' and usage_type != 'date' %}
+                "{{ usage_type }}",
+              {% endif %}
+            {% endfor %}
+          ],
+
+          datasets: [{
+            fillColor: "rgba(151, 187, 205, 0.2)",
+            strokeColor: "rgba(151, 187, 205, 1)",
+            pointColor: "rgba(151, 187, 205, 1)",
+            data: [
+              {% for usage_type in waterpoint_data['waterpointUsage'] %}
+                {% if usage_type!='id' and usage_type!='date' %}
+                  "{{ waterpoint_data['waterpointUsage'][usage_type] }}",
+                {% endif %}
+              {% endfor %}
+            ]
+          }],
+        };
+
+        var usageChart = document.getElementById("pie-chart");
+
+        steps = 5;
+        max = 200;
+
+        new Chart(usageChart).Pie(pieData);
+
+      };
+    </script>
+
+    <h2>Done</h2>
+  </body>
+</html>
