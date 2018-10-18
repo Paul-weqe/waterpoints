@@ -1,13 +1,24 @@
 from flask import Flask, render_template, jsonify
-from get_data import all_waterpoints, known_waterpoints
+from get_data import *
 
 app = Flask(__name__)
+
+counties_info = []
+for x in counties_waterpoints:
+    counties_info.append({"name":x, "population": counties_waterpoints[x]})
 
 @app.route("/")
 def index():
     #return json.JSONEncoder(waterpoints)
     #return render_template("index.html")
-    return render_template('index.html', points={"data":known_waterpoints})
+    number_of_counties = len(all_counties)
+    number_of_waterpoints = len(all_waterpoints)
+    
+
+    return render_template('index.html', points={"data":known_waterpoints},
+        number_of_counties=number_of_counties, number_of_waterpoints=number_of_waterpoints,
+        total_population = total_population, counties_waterpoints=counties_info,
+        number_of_wards=len(all_wards), )
 
 
 @app.route("/waterpoint-info/<int:waterpoint_id>")

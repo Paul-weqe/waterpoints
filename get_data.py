@@ -10,11 +10,15 @@ json_data = json_file.read()
 json_data = json.loads(json_data)
 
 all_waterpoints = [] # lists all waterpoints available
+all_counties = [] # lists all the counties that have been covered during this analysis
+total_population = 0 # gets the total number of people being covered
 unknown_waterpoints = [] # lists all the waterpoints whose locations we don't have
 known_waterpoints = [] # has a list of all the waterpoints in which we have the location of
 distances = [] # has the all the closest distances to all the waterpoints, unseived
 inactive = 0
 active = 0
+counties_waterpoints = {}
+all_wards = []
 
 
 waterpoints_info = [] # holds triples of lat, lon and id
@@ -62,6 +66,7 @@ def get_active_waterpoints():
             else:
                 active += 1
     return active
+
 
 # adds all the known point's information to the waterpoints_info list
 # this will be useful later...you'll see
@@ -128,7 +133,34 @@ def get_usage_types():
                 if usage_type not in types:
                     types.append(usage_type)
 
-get_usage_types()
-print(types)
+
+def get_number_of_counties():
+    for point in all_waterpoints:
+        if 'county' in point and point['county']['name'] not in all_counties:
+            all_counties.append(point['county']['name'])
+
+        if 'county' in point and point['county']['name'] not in counties_waterpoints:
+            counties_waterpoints[point['county']['name']] = 1
+        elif 'county' in point and point['county']['name'] in counties_waterpoints:
+            counties_waterpoints[point['county']['name']] += 1
+
+    return None
+
+def get_population():
+    population = 0
+    for point in all_waterpoints:
+        if 'waterpointUsage' in point and 'people' in point['waterpointUsage']:
+            population += point['waterpointUsage']['people']
+    return population
 # print(get_central_point())
 # print(get_cost_per_liter())
+
+
+def get_all_wards():
+    for point in all_waterpoints:
+        if 'ward' in point and point['ward']['name'] not in all_wards:
+            all_wards.append( point['ward']['name'] )
+
+total_population += get_population()
+get_number_of_counties()
+get_all_wards()
