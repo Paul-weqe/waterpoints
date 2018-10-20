@@ -10,22 +10,28 @@
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="images/favicon.png">
-    <link rel="shortcut icon" href="images/favicon.png"> 
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
 
-    <link rel="stylesheet" href="assets/css/normalize.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
-    <link rel="stylesheet" href="assets/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/pe-icon-7-filled.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/cs-skin-elastic.css') }}">
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+    <style>
+    #map {
+      height: 400px;  /* The height is 400 pixels */
+      width: 100%;  /* The width is the width of the web page */
+     }
+    </style>
     <!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/html5shiv/3.7.3/html5shiv.min.js"></script> -->
 
 </head>
@@ -46,7 +52,7 @@
                         <ul class="sub-menu children dropdown-menu">                            <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">Buttons</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Badges</a></li>
                             <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Tabs</a></li>
-                            
+
                             <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Cards</a></li>
                             <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">Alerts</a></li>
                             <li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Progress Bars</a></li>
@@ -120,16 +126,16 @@
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-        <header id="header" class="header">  
+        <header id="header" class="header">
             <div class="top-left">
-                <div class="navbar-header"> 
-                    <a class="navbar-brand" href="./"><img src="images/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a> 
-                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a> 
-                </div> 
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="./"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="./"><img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo"></a>
+                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+                </div>
             </div>
-            <div class="top-right"> 
-                <div class="header-menu"> 
+            <div class="top-right">
+                <div class="header-menu">
                     <div class="header-left">
                         <button class="search-trigger"><i class="fa fa-search"></i></button>
                         <div class="form-inline">
@@ -169,7 +175,7 @@
                             <div class="dropdown-menu" aria-labelledby="message">
                                 <p class="red">You have 4 Mails</p>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="images/avatar/1.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="{{ url_for('static', filename='images/avatar/1.jpg') }}"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Jonathan Smith</span>
                                         <span class="time float-right">Just now</span>
@@ -177,7 +183,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="images/avatar/2.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="{{ url_for('static', filename='images/avatar/2.jpg') }}"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Jack Sanders</span>
                                         <span class="time float-right">5 minutes ago</span>
@@ -185,7 +191,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="images/avatar/3.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="{{ url_for('static', filename='images/avatar/3.jpg') }}"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Cheryl Wheeler</span>
                                         <span class="time float-right">10 minutes ago</span>
@@ -193,7 +199,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="images/avatar/4.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="{{ url_for('static', filename='images/avatar/4.jpg') }}"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Rachel Santos</span>
                                         <span class="time float-right">15 minutes ago</span>
@@ -206,7 +212,7 @@
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="{{ url_for('static', filename='images/admin.jpg') }}" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -218,8 +224,8 @@
 
                             <a class="nav-link" href="#"><i class="fa fa-power-off"></i>Logout</a>
                         </div>
-                    </div> 
-                </div>  
+                    </div>
+                </div>
             </div>
         </header><!-- /header -->
         <!-- Header-->
@@ -251,15 +257,42 @@
 
         <div class="content">
             <div class="animated fadeIn">
-
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-header">
-                                <h4>Basic Map</h4>
+                                <h4>Current waterpoints</h4>
                             </div>
-                            <div class="gmap_unix card-body">
-                                <div class="map" id="basic-map"></div>
+                            <div class="gmap_unix card-body" id="map">
+                                <!-- <div class="map" id="basic-map"></div> -->
+                                <script>
+                                // Initialize and add the map
+                                var red_marker = "https://storage.googleapis.com/support-kms-prod/SNP_2752125_en_v0";
+                                var icons = {
+                                  location: {
+                                    icon: red_marker,
+                                  },
+                                };
+
+                                function initMap() {
+                                  central_point = {{central_point_json["central_point"]}};
+                                  // The location of Uluru
+                                  // var uluru = {lat: -25.344, lng: 131.036};
+                                  var central = {lat: central_point[0], lng: central_point[1]};
+                                  // The map, centered at Uluru
+                                  var map = new google.maps.Map(
+                                    document.getElementById('map'), {zoom: 8, center: central});
+                                  // The marker, positioned at Uluru
+                                  // var marker = new google.maps.Marker({
+                                  //   position: central, map: map, icon: red_marker
+                                  // });
+                                  var all_waterpoint_locations = {{ all_waterpoint_locations }};
+                                  {% for point in all_waterpoint_locations %}
+                                    
+                                  {% endfor %}
+                                }
+                                </script>
+
                             </div>
                         </div>
                         <!-- /# card -->
@@ -384,16 +417,21 @@
     <!-- Right Panel -->
 
 
-    <script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
-    <script src="assets/js/popper.min.js"></script>
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="{{ url_for('static', filename='assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/plugins.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 
     <!-- Gmaps -->
     <script src="https://maps.googleapis.com/maps/api/js?v=3&sensor=false"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD2jlT6C_to6X1mMvR9yRWeRvpIgTXgddM"></script>
-    <script src="assets/js/lib/gmap/gmaps.js"></script>
-    <script src="assets/js/lib/gmap/gmap.init.js"></script>
+    <script src="{{ url_for('static', filename='assets/js/lib/gmap/gmaps.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/lib/gmap/gmap.init.js') }}"></script>
+
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMOgSNZPJqzIDDcsZhcHBtxWnWZEVz3qI&callback=initMap">
+    </script>
+
 
 </body>
 </html>

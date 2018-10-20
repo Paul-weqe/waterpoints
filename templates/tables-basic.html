@@ -10,18 +10,18 @@
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="apple-touch-icon" href="images/favicon.png">
-    <link rel="shortcut icon" href="images/favicon.png"> 
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/favicon.png') }}">
 
-    <link rel="stylesheet" href="assets/css/normalize.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/themify-icons.css">
-    <link rel="stylesheet" href="assets/css/pe-icon-7-filled.css">
-    <link rel="stylesheet" href="assets/css/flag-icon.min.css">
-    <link rel="stylesheet" href="assets/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/pe-icon-7-filled.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/cs-skin-elastic.css') }}">
     <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -45,7 +45,7 @@
                         <ul class="sub-menu children dropdown-menu">                            <li><i class="fa fa-puzzle-piece"></i><a href="ui-buttons.html">Buttons</a></li>
                             <li><i class="fa fa-id-badge"></i><a href="ui-badges.html">Badges</a></li>
                             <li><i class="fa fa-bars"></i><a href="ui-tabs.html">Tabs</a></li>
-                            
+
                             <li><i class="fa fa-id-card-o"></i><a href="ui-cards.html">Cards</a></li>
                             <li><i class="fa fa-exclamation-triangle"></i><a href="ui-alerts.html">Alerts</a></li>
                             <li><i class="fa fa-spinner"></i><a href="ui-progressbar.html">Progress Bars</a></li>
@@ -119,16 +119,16 @@
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
-        <header id="header" class="header">  
+        <header id="header" class="header">
             <div class="top-left">
-                <div class="navbar-header"> 
-                    <a class="navbar-brand" href="./"><img src="images/logo.png" alt="Logo"></a>
-                    <a class="navbar-brand hidden" href="./"><img src="images/logo2.png" alt="Logo"></a> 
-                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a> 
-                </div> 
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="./"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo"></a>
+                    <a class="navbar-brand hidden" href="./"><img src="{{ url_for('static', filename='images/logo2.png') }}" alt="Logo"></a>
+                    <a id="menuToggle" class="menutoggle"><i class="fa fa-bars"></i></a>
+                </div>
             </div>
-            <div class="top-right"> 
-                <div class="header-menu"> 
+            <div class="top-right">
+                <div class="header-menu">
                     <div class="header-left">
                         <button class="search-trigger"><i class="fa fa-search"></i></button>
                         <div class="form-inline">
@@ -168,7 +168,7 @@
                             <div class="dropdown-menu" aria-labelledby="message">
                                 <p class="red">You have 4 Mails</p>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="images/avatar/1.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="{{ url_for('static', filename='images/avatar/1.jpg') }}"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Jonathan Smith</span>
                                         <span class="time float-right">Just now</span>
@@ -176,7 +176,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="images/avatar/2.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="{{ url_for('static', filename='images/avatar/2.jpg') }}"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Jack Sanders</span>
                                         <span class="time float-right">5 minutes ago</span>
@@ -184,7 +184,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="images/avatar/3.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="{{ url_for('static', filename='images/avatar/3.jpg') }}"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Cheryl Wheeler</span>
                                         <span class="time float-right">10 minutes ago</span>
@@ -192,7 +192,7 @@
                                     </div>
                                 </a>
                                 <a class="dropdown-item media" href="#">
-                                    <span class="photo media-left"><img alt="avatar" src="images/avatar/4.jpg"></span>
+                                    <span class="photo media-left"><img alt="avatar" src="{{ url_for('static', filename='images/avatar/4.jpg') }}"></span>
                                     <div class="message media-body">
                                         <span class="name float-left">Rachel Santos</span>
                                         <span class="time float-right">15 minutes ago</span>
@@ -205,7 +205,7 @@
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img class="user-avatar rounded-circle" src="images/admin.jpg" alt="User Avatar">
+                            <img class="user-avatar rounded-circle" src="{{ url_for('static', filename='images/admin.jpg') }}" alt="User Avatar">
                         </a>
 
                         <div class="user-menu dropdown-menu">
@@ -217,8 +217,8 @@
 
                             <a class="nav-link" href="#"><i class="fa fa-power-off"></i>Logout</a>
                         </div>
-                    </div> 
-                </div>  
+                    </div>
+                </div>
             </div>
         </header><!-- /header -->
         <!-- Header-->
@@ -254,82 +254,82 @@
                     <div class="col-lg-6">
                         <div class="card">
                             <div class="card-header">
-                                <strong class="card-title">Custom Table</strong>
+                                <strong class="card-title">Ditance disparity table</strong>
                             </div>
                             <div class="table-stats order-table ov-h">
                                 <table class="table ">
                                     <thead>
                                         <tr>
                                             <th class="serial">#</th>
-                                            <th class="avatar">Avatar</th>
+                                            <!-- <th class="avatar">Avatar</th> -->
                                             <th>ID</th>
                                             <th>Name</th>
                                             <th>Product</th>
                                             <th>Quantity</th>
-                                            <th>Status</th>
+                                            <!-- <th>Status</th> -->
                                         </tr>
                                     </thead>
-                                    <tbody> 
+                                    <tbody>
                                         <tr>
                                             <td class="serial">1.</td>
-                                            <td class="avatar">
+                                            <!-- <td class="avatar">
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="images/avatar/1.jpg" alt=""></a>
+                                                    <a href="#"><img class="rounded-circle" src="{{ url_for('static', filename='images/avatar/1.jpg') }}" alt=""></a>
                                                 </div>
-                                            </td>
+                                            </td> -->
                                             <td> #5469 </td>
-                                            <td>  <span class="name">Louis Stanley</span> </td> 
+                                            <td>  <span class="name">Louis Stanley</span> </td>
                                             <td> <span class="product">iMax</span> </td>
                                             <td><span class="count">231</span></td>
-                                            <td> 
+                                            <!-- <td>
                                                 <span class="badge badge-complete">Complete</span>
-                                            </td> 
+                                            </td> -->
                                         </tr>
                                         <tr>
                                             <td class="serial">2.</td>
-                                            <td class="avatar">
+                                            <!-- <td class="avatar">
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="images/avatar/2.jpg" alt=""></a> 
+                                                    <a href="#"><img class="rounded-circle" src="{{ url_for('static', filename='images/avatar/2.jpg') }}" alt=""></a>
                                                 </div>
-                                            </td> 
+                                            </td> -->
                                             <td> #5468 </td>
-                                            <td>  <span class="name">Gregory Dixon</span> </td> 
+                                            <td>  <span class="name">Gregory Dixon</span> </td>
                                             <td> <span class="product">iPad</span> </td>
                                             <td><span class="count">250</span></td>
-                                            <td> 
+                                            <!-- <td>
                                                 <span class="badge badge-complete">Complete</span>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                         <tr>
                                             <td class="serial">3.</td>
-                                            <td class="avatar">
+                                            <!-- <td class="avatar">
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="images/avatar/3.jpg" alt=""></a> 
+                                                    <a href="#"><img class="rounded-circle" src="{{ url_for('static', filename='images/avatar/3.jpg') }}" alt=""></a>
                                                 </div>
-                                            </td>
+                                            </td> -->
                                             <td> #5467 </td>
-                                            <td>  <span class="name">Catherine Dixon</span> </td> 
+                                            <td>  <span class="name">Catherine Dixon</span> </td>
                                             <td> <span class="product">SSD</span> </td>
                                             <td><span class="count">250</span></td>
-                                            <td> 
+                                            <!-- <td>
                                                 <span class="badge badge-complete">Complete</span>
-                                            </td>
+                                            </td> -->
                                         </tr>
                                         <tr>
                                             <td class="serial">4.</td>
-                                            <td class="avatar">
+                                            <!-- <td class="avatar">
                                                 <div class="round-img">
-                                                    <a href="#"><img class="rounded-circle" src="images/avatar/4.jpg" alt=""></a> 
+                                                    <a href="#"><img class="rounded-circle" src="{{ url_for('static', filename='images/avatar/4.jpg') }}" alt=""></a>
                                                 </div>
-                                            </td>
+                                            </td> -->
                                             <td> #5466 </td>
-                                            <td>  <span class="name">Mary Silva</span> </td> 
+                                            <td>  <span class="name">Mary Silva</span> </td>
                                             <td> <span class="product">Magic Mouse</span> </td>
                                             <td><span class="count">250</span></td>
-                                            <td> 
+                                            <!-- <td>
                                                 <span class="badge badge-pending">Pending</span>
-                                            </td>
-                                        </tr> 
+                                            </td> -->
+                                        </tr>
                                     </tbody>
                                 </table>
                             </div> <!-- /.table-stats -->
@@ -497,7 +497,7 @@
             </div>
 
 
-            
+
 
             <div class="col-lg-6">
                 <div class="card">
@@ -601,10 +601,10 @@
 <!-- Right Panel -->
 
 
-<script src="assets/js/vendor/jquery-2.1.4.min.js"></script>
-<script src="assets/js/popper.min.js"></script>
-<script src="assets/js/plugins.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="{{ url_for('static', filename='assets/js/vendor/jquery-2.1.4.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/popper.min.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/plugins.js') }}"></script>
+<script src="{{ url_for('static', filename='assets/js/main.js') }}"></script>
 
 
 </body>
