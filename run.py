@@ -47,10 +47,11 @@ def data_tables():
 @app.route('/google-maps')
 def google_maps():
     central_point_json = {"central_point": central_point}
+    searchForm = SearchForm()
     # all_waterpoints = all_waterpoints
-    all_waterpoints_locations = all_waterpoint_locations
+    # all_waterpoint_locations = all_waterpoint_locations
     return render_template("maps-gmap.html", central_point_json=central_point_json,
-            all_waterpoint_locations=all_waterpoint_locations)
+            all_waterpoint_locations=all_waterpoint_locations, searchForm=searchForm)
 
 if __name__ == "__main__":
     app.run(debug=True)

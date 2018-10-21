@@ -10,7 +10,7 @@ json_data = json_file.read()
 json_data = json.loads(json_data)
 
 all_waterpoints = [] # lists all waterpoints available
-all_waterpoints_locations = []
+all_waterpoint_locations = []
 all_counties = [] # lists all the counties that have been covered during this analysis
 total_population = 0 # gets the total number of people being covered
 unknown_waterpoints = [] # lists all the waterpoints whose locations we don't have
@@ -164,11 +164,27 @@ def get_all_wards():
             all_wards.append( point['ward']['name'] )
 
 
-for x in all_waterpoints:
-    all_waterpoints_locations.append([x.id, x.lon, x.lat, x.name])
-    
+for x in known_waterpoints:
+    # all_waterpoint_locations.append([x["id"], x["lon"], x["lat"], x["name"]])
+    # print(x["id"])
+    data = {}
+    if "name" in x:
+        data["id"] = x["id"]
+        data["lat"] = x["lat"]
+        data["lon"] = x["lon"]
+        data["name"]= x["name"]
+        # all_waterpoint_locations.append([x["lat"], x["lon"], x["name"], x["id"]])
+    all_waterpoint_locations.append(data)
+
 total_population += get_population()
 get_number_of_counties()
 get_all_wards()
 central_point = get_central_point()
 get_active_waterpoints()
+
+
+# for x in all_waterpoint_locations:
+#     print(x)
+#     print("############")
+
+# print(all_waterpoint_locations)
