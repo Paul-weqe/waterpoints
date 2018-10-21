@@ -1,27 +1,22 @@
-{% extends 'base.html' %}
-    {% block styles %}
-      <style>
-         /* Set the size of the div element that contains the map */
-        #map {
-          height: 400px;  /* The height is 400 pixels */
-          width: 100%;  /* The width is the width of the web page */
-         }
-      </style>
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
 
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-
-    {% endblock styles %}
-
-  {% block content %}
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+  </head>
+  <body>
     <h3>{{ waterpoint_data["name"] }}</h3>
     <!--The div element for the map -->
     <div id="map"></div>
-
-  {% endblock content %}
-
-{% block scripts %}
     <script>
 
 
@@ -147,4 +142,7 @@
 
       };
     </script>
-    {% endblock scripts %}
+
+    <h2>Done</h2>
+  </body>
+</html>

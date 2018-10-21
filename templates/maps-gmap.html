@@ -292,13 +292,9 @@
 
                                   for (var counter = 0; counter < locations.length; counter ++){
                                     var position = {lat: locations[counter]["lat"], lng: locations[counter]["lon"]}
-
-                                    var locationName = locations[counter]["name"];
+                                    var url = "http://127.0.0.1:5000/"
+                                    var locationName = "<a href='"+url+"waterpoint-info/"+ locations[counter]["id"] +"'>" + locations[counter]["name"]  + "</a>";
                                     // alert(locationName);
-
-                                    // var infoWindow = new google.maps.InfoWindow({
-                                    //   content: location
-                                    // });
 
                                     // infoWindow = new google.maps.InfoWindow({content:locat})
                                     var newMarker = new google.maps.Marker({
