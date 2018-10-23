@@ -66,6 +66,10 @@ def google_maps():
             all_waterpoint_locations=all_waterpoint_locations, searchForm=searchForm)
 
 
+# @app.route('/')
+@app.route('/basic-forms')
+def forms_basic():
+    return render_template("forms-basic.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
