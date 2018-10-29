@@ -33,6 +33,7 @@ def index():
 @app.route("/waterpoint-info/<waterpoint_id>")
 def waterpoint_info(waterpoint_id):
     waterpoint = None
+
     searchForm = SearchForm()
     for point in all_waterpoints:
         if point["id"] == int(waterpoint_id):
@@ -43,17 +44,14 @@ def waterpoint_info(waterpoint_id):
     return render_template("waterpoint_info.html", waterpoint_data=waterpoint, searchForm=searchForm)
 
 
-
 @app.route("/basic-tables")
 def basic_tables():
     return render_template("tables-basic.html")
 
 
-
 @app.route('/data-tables')
 def data_tables():
     return render_template("tables-data.html")
-
 
 
 @app.route('/google-maps')
@@ -70,6 +68,12 @@ def google_maps():
 @app.route('/basic-forms')
 def forms_basic():
     return render_template("forms-basic.html")
+
+
+@app.route('/vector-maps')
+def vector_maps():
+    return render_template("maps-vector.html")
+
 
 if __name__ == "__main__":
     app.run(debug=True)

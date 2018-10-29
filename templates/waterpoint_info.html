@@ -1,150 +1,160 @@
 {% extends 'base.html' %}
-    {% block styles %}
-      <style>
-         /* Set the size of the div element that contains the map */
-        #map {
-          height: 400px;  /* The height is 400 pixels */
-          width: 100%;  /* The width is the width of the web page */
-         }
-      </style>
 
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.1.4/Chart.bundle.min.js'></script>
-      <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js'></script>
-      <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    {% block styles %}
+    <style>
+       /* Set the size of the div element that contains the map */
+      #map {
+        height: 400px;  /* The height is 400 pixels */
+        width: 100%;  /* The width is the width of the web page */
+       }
+    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/flag-icon.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/cs-skin-elastic.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/lib/datatable/dataTables.bootstrap.min.css') }}">
+    <!-- <link rel="stylesheet" href="assets/css/bootstrap-select.less"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}">
 
     {% endblock styles %}
 
-  {% block content %}
-    <h3>{{ waterpoint_data["name"] }}</h3>
-    <!--The div element for the map -->
-    <div id="map"></div>
+    {% block content %}
 
-  {% endblock content %}
+    <div class="content">
+      <div class="animated fadeIn">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-header">
+                <h4>{{ waterpoint_data["name"] }}</h4>
+              </div>
+              <div class="Vector-map-js">
+                <!-- <div id="vmap" class="vmap">
+              </div> -->
+              <div id="map">
+              </div>
+            </div>
+          </div>
+          <!-- /# card -->
+        </div>
+        <!-- /# column -->
+      </div>
 
-{% block scripts %}
+      <div class="row">
+        <!--  bein table -->
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-header">
+              <strong class="card-title">Waterpoint information</strong>
+            </div>
+            <div class="card-body">
+              <table id="bootstrap-data-table" class="table table-striped table-bordered">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <!-- <th>Office</th>
+                    <th>Salary</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- <tr>
+                    <td>Tiger Nixon</td>
+                    <td>System Architect</td>
+                    <td>Edinburgh</td>
+                    <td>$320,800</td>
+                  </tr> -->
+                  {% for field in waterpoint_data %}
+                    <tr>
+                      <td>{{ field }}</td>
+                      <!-- <td>{{ waterpoint_data[field]  }}</td> -->
+                      {% if 'dict' in mapping.__class__.__name__ %}
+
+                      <td>
+                      </td>
+                      {% else %}
+                      <td>
+                        {{ waterpoint_data[field] }}
+                      </td>
+
+                      {% endif %}
+
+                    </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <!-- end table -->
+      </div>
+    </div>
+  </div>
+
+    {% endblock content %}
+
+    {% block scripts %}
     <script>
-
-
     // Initialize and add the map
-
     var coordinates = {{waterpoint_data|tojson}};
-
     if ('lat' in coordinates && 'lon' in coordinates){
       function initMap() {
         // The location of Uluru
         var center = {lat: coordinates['lat'], lng: coordinates['lon']};
         // The map, centered at Uluru
-
         var map = new google.maps.Map(
           document.getElementById('map'), {zoom: 8, center: center});
           // The marker, positioned at Uluru
-          // var position = {lat: coordinates['lat'], lng: coordinates['lon']};
+          var position = {lat: coordinates['lat'], lng: coordinates['lon']};
           var marker = new google.maps.Marker({position: center, map: map});
+
+          if ('waterpointUsage' in coordinates){
+            var population = coordinates['waterpointUsage']['people'];
+
+            var cityCircle = new google.maps.Circle({
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35,
+              map: map,
+              center: center,
+              radius: Math.sqrt(population) * 1000,
+            });
+          }
         }
       }
     </script>
-
     <!--Load the API from the specified URL
     * The async attribute allows the browser to render the page while the API loads
     * The key parameter will contain your own API key (which is not needed for this tutorial)
     * The callback parameter executes the initMap() function
     -->
+
     <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD-Rm0pvzc0Z5fgSTrrb8mM5p23fPHaVHA&callback=initMap">
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOc5I-yi007XYiaDx6wm0ooUC8h5rigLU&callback=initMap">
     </script>
 
-    <br>
-    <h2>New</h2>
 
-    <!-- gets and displays the cost attached to the specific waterpoint -->
-    <canvas id="chart" width="600", height=400></canvas>
-    <script>
+        <script src="{{ url_for('static', filename='assets/js/lib/data-table/datatables.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/lib/data-table/dataTables.bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/lib/data-table/dataTables.buttons.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/lib/data-table/buttons.bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/lib/data-table/jszip.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/lib/data-table/pdfmake.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/lib/data-table/vfs_fonts.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/lib/data-table/buttons.html5.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/lib/data-table/buttons.print.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/lib/data-table/buttons.colVis.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='assets/js/lib/data-table/datatables-init.js') }}"></script>
 
-      var waterpoint = {{waterpoint_data|tojson}};
-      if ('waterpointCost' in waterpoint){
-        var barData = {
-          labels : [
-            {% for cost_type in waterpoint_data['waterpointCost'] %}
-              {% if cost_type != "id" and cost_type != "date" %}
-                "{{ cost_type }}",
-              {% endif %}
-            {% endfor %}
-          ],
-
-          datasets: [{
-            fillColor: "rgba(151, 187, 205, 0.2)",
-            strokeColor: "rgba(151, 187, 205, 1)",
-            pointColor: "rgba(151, 187, 205, 1)",
-            data: [
-              {% for cost_type in waterpoint_data['waterpointCost'] %}
-                {% if cost_type != "id" and cost_type != "date" %}
-                  "{{ waterpoint_data['waterpointCost'][cost_type] }}",
-                {% endif %}
-              {% endfor %}
-            ]
-          }],
-        };
-
-        var costChart = document.getElementById("chart").getContext("2d");
-
-        steps = 5;
-        max = 50;
+        <script type="text/javascript">
+            $(document).ready(function() {
+              $('#bootstrap-data-table-export').DataTable();
+          } );
+      </script>
 
 
-        // draw chart
-        new Chart(costChart).Bar(barData, {
-          scaleOverride: true,
-          scaleSteps: steps,
-          scaleStepWidth: Math.ceil(max/steps),
-          scaleStartValue: 0,
-          scaleShowVerticalLines: true,
-          scaleShowGridLines: true,
-          barShowStroke: true,
-          scaleShowLabels: true
-        });
-
-       }
-
-
-    </script>
-
-    <!-- draw a pie chart of how the usage of water is in the waterpoint -->
-    <canvas id="pie-chart" width="600" height="400"></canvas>
-    <script>
-      var waterpoint = {{waterpoint_data|tojson}};
-
-      if ('waterpointUsage' in waterpoint){
-
-        var pieData = {
-          labels: [
-            {% for usage_type in waterpoint_data['waterpointUsage'] %}
-              {% if usage_type != 'id' and usage_type != 'date' %}
-                "{{ usage_type }}",
-              {% endif %}
-            {% endfor %}
-          ],
-
-          datasets: [{
-            fillColor: "rgba(151, 187, 205, 0.2)",
-            strokeColor: "rgba(151, 187, 205, 1)",
-            pointColor: "rgba(151, 187, 205, 1)",
-            data: [
-              {% for usage_type in waterpoint_data['waterpointUsage'] %}
-                {% if usage_type!='id' and usage_type!='date' %}
-                  "{{ waterpoint_data['waterpointUsage'][usage_type] }}",
-                {% endif %}
-              {% endfor %}
-            ]
-          }],
-        };
-
-        var usageChart = document.getElementById("pie-chart");
-
-        steps = 5;
-        max = 200;
-
-        new Chart(usageChart).Pie(pieData);
-
-      };
-    </script>
     {% endblock scripts %}
