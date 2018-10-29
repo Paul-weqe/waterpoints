@@ -355,6 +355,7 @@
         }
     } );
 
+    
     //polar chart
     var ctx = document.getElementById( "polarChart" );
     ctx.height = 150;

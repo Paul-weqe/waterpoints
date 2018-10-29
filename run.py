@@ -6,6 +6,8 @@ app = Flask(__name__)
 app.config["SECRET_KEY"] = "2018"
 # SECRET_KEY = '2018'
 
+highest_distances = {}
+highest = 0
 
 
 counties_info = []
@@ -26,7 +28,7 @@ def index():
     return render_template('index.html', points={"data":known_waterpoints},
         number_of_counties=number_of_counties, number_of_waterpoints=number_of_waterpoints,
         total_population = total_population, counties_waterpoints=counties_info,
-        number_of_wards=len(all_wards), searchForm=searchForm)
+        number_of_wards=len(all_wards), searchForm=searchForm, waterpoint_distances=waterpoint_distances)
 
 
 
@@ -74,6 +76,10 @@ def forms_basic():
 def vector_maps():
     return render_template("maps-vector.html")
 
+@app.route('/chart-js')
+def chart_js():
+    searchForm = SearchForm()
+    return render_template("charts-chartjs.html", searchForm=searchForm)
 
 if __name__ == "__main__":
     app.run(debug=True)

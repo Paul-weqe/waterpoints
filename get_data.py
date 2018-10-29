@@ -21,7 +21,7 @@ active = 0
 counties_waterpoints = {}
 all_wards = []
 central_point = []
-
+waterpoints_distances = {}
 
 waterpoints_info = [] # holds triples of lat, lon and id
 waterpoints_distances = {}
@@ -73,7 +73,7 @@ def get_active_waterpoints():
 # adds all the known point's information to the waterpoints_info list
 # this will be useful later...you'll see
 def get_all_known_points():
-    for point in waterpoints:
+    for point in known_waterpoints:
         waterpoints_info.append([point['lat'], point['lon'], point['id']])
 
 
@@ -181,7 +181,7 @@ get_number_of_counties()
 get_all_wards()
 central_point = get_central_point()
 get_active_waterpoints()
-
+get_closest_waterpoints()
 
 # for x in all_waterpoint_locations:
 #     print(x)

@@ -23,7 +23,8 @@
 
     <div class="content">
       <div class="animated fadeIn">
-        <div class="row">
+		  
+		  <div class="row">
           <div class="col-lg-12">
             <div class="card">
               <div class="card-header">
@@ -40,8 +41,8 @@
         </div>
         <!-- /# column -->
       </div>
-
-      <div class="row">
+		  
+		  <div class="row">
         <!--  bein table -->
         <div class="col-md-12">
           <div class="card">
@@ -90,6 +91,17 @@
 
         <!-- end table -->
       </div>
+		  
+		  <div class="row">
+			  <div class="col-lg-12">
+				  <div class="card">
+					  <div class="card-body">
+						  <h4 class="mb-3">popo</h4>
+						  <canvas id="sales-chart"></canvas>
+					  </div>
+				  </div>
+			  </div>
+		  </div>
     </div>
   </div>
 
@@ -132,7 +144,42 @@
     * The key parameter will contain your own API key (which is not needed for this tutorial)
     * The callback parameter executes the initMap() function
     -->
-
+<script>
+      // area bar chart
+      var ctx = document.getElementById( "comparisonBarChart" );
+      //    ctx.height = 200;
+      var myChart = new Chart( ctx, {
+          type: 'bar',
+          data: {
+              labels: [ "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul" ],
+              datasets: [
+                  {
+                      label: "My First dataset",
+                      data: [ 65, 59, 80, 81, 56, 55, 45 ],
+                      borderColor: "rgba(0, 194, 146, 0.9)",
+                      borderWidth: "0",
+                      backgroundColor: "rgba(0, 194, 146, 0.5)"
+                              },
+                  {
+                      label: "My Second dataset",
+                      data: [ 28, 48, 40, 19, 86, 27, 76 ],
+                      borderColor: "rgba(0,0,0,0.09)",
+                      borderWidth: "0",
+                      backgroundColor: "rgba(0,0,0,0.07)"
+                              }
+                          ]
+          },
+          options: {
+              scales: {
+                  yAxes: [ {
+                      ticks: {
+                          beginAtZero: true
+                      }
+                                  } ]
+              }
+          }
+      } );
+    </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAOc5I-yi007XYiaDx6wm0ooUC8h5rigLU&callback=initMap">
     </script>
@@ -150,11 +197,13 @@
         <script src="{{ url_for('static', filename='assets/js/lib/data-table/buttons.colVis.min.js') }}"></script>
         <script src="{{ url_for('static', filename='assets/js/lib/data-table/datatables-init.js') }}"></script>
 
+		<script src="{{ url_for('static', filename='assets/js/lib/chart-js/Chart.bundle.js') }}"></script>
+		<script src="{{ url_for('static', filename='assets/js/lib/chart-js/chartjs-init.js') }}"></script>
+
         <script type="text/javascript">
             $(document).ready(function() {
               $('#bootstrap-data-table-export').DataTable();
           } );
       </script>
-
 
     {% endblock scripts %}
