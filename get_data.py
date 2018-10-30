@@ -2,6 +2,8 @@ import requests
 import json
 from calculations import get_distance
 from statistics import variance
+import pandas as pd
+import statistics as st
 #req = requests.get("https://kenya-rapid-app-server-dev.mybluemix.net/waterpoints")
 #json_data = req.json()
 
@@ -43,6 +45,19 @@ for x in json_data["data"]:
     else:
         unknown_waterpoints.append(x)
     all_waterpoints.append(x)
+
+
+for x in known_waterpoints:
+    # all_waterpoint_locations.append([x["id"], x["lon"], x["lat"], x["name"]])
+    # print(x["id"])
+    data = {}
+    if "name" in x:
+        data["id"] = x["id"]
+        data["lat"] = x["lat"]
+        data["lon"] = x["lon"]
+        data["name"]= x["name"]
+        # all_waterpoint_locations.append([x["lat"], x["lon"], x["name"], x["id"]])
+    all_waterpoint_locations.append(data)
 
 
 waterpoint_quality = {
@@ -164,18 +179,19 @@ def get_all_wards():
             all_wards.append( point['ward']['name'] )
 
 
-for x in known_waterpoints:
-    # all_waterpoint_locations.append([x["id"], x["lon"], x["lat"], x["name"]])
-    # print(x["id"])
-    data = {}
-    if "name" in x:
-        data["id"] = x["id"]
-        data["lat"] = x["lat"]
-        data["lon"] = x["lon"]
-        data["name"]= x["name"]
-        # all_waterpoint_locations.append([x["lat"], x["lon"], x["name"], x["id"]])
-    all_waterpoint_locations.append(data)
+def reduce_datapoints_distances():
+    lats = []
+    lons = []
+    for point in all_waterpoint_locations:
+        lats.append(point["lat"])
 
+    for point in all_waterpoint_locations:
+        lons.append(point["lon"])
+
+    print(st.variance(lats))
+    print(st.variance(lons))
+
+reduce_datapoints_distances()
 total_population += get_population()
 get_number_of_counties()
 get_all_wards()

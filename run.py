@@ -28,7 +28,7 @@ def index():
     return render_template('index.html', points={"data":known_waterpoints},
         number_of_counties=number_of_counties, number_of_waterpoints=number_of_waterpoints,
         total_population = total_population, counties_waterpoints=counties_info,
-        number_of_wards=len(all_wards), searchForm=searchForm, waterpoint_distances=waterpoint_distances)
+        number_of_wards=len(all_wards), searchForm=searchForm, waterpoint_distances=waterpoints_distances)
 
 
 
