@@ -44,8 +44,8 @@
         }
     </style>
     {% endblock styles %}
-	
-	
+
+
     {% block content %}
         <div class="content pb-0">
 
@@ -136,8 +136,9 @@
                         <div class="row">
                             <div class="col-lg-8">
                                 <div class="card-body">
-                                    <!-- <canvas id="TrafficChart"></canvas>   -->
-                                    <div id="traffic-chart" class="traffic-chart"></div>
+                                    <!-- <canvas id="TrafficChart"></canvas> -->
+                                    <!-- <div id="traffic-chart" class="traffic-chart"></div> -->
+                                    <div id="flotPie1" class="float-chart"></div>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -189,7 +190,7 @@
                     <div class="col-xl-8">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="box-title">Orders </h4>
+                                <h4 class="box-title">Counties </h4>
                             </div>
                             <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
@@ -197,90 +198,33 @@
                                         <thead>
                                             <tr>
                                                 <th class="serial">#</th>
-                                                <th class="avatar">Avatar</th>
-                                                <th>ID</th>
+                                                <!-- <th class="avatar">Avatar</th> -->
+                                                <!-- <th>ID</th> -->
                                                 <th>Name</th>
-                                                <th>Product</th>
-                                                <th>Quantity</th>
-                                                <th>Status</th>
+                                                <!-- <th>Product</th> -->
+                                                <th>Number of waterpoints</th>
+                                                <!-- <th>Status</th> -->
                                             </tr>
                                         </thead>
                                         <tbody>
+                                          {% set counter = 1 %}
+                                          {% for point in counties_waterpoints %}
                                             <tr>
-                                                <td class="serial">1.</td>
-                                                <td class="avatar">
+                                                <td class="serial">{{ loop.index }}.</td>
+                                                <!-- <td class="avatar">
                                                     <div class="round-img">
                                                         <a href="#"><img class="rounded-circle" src="{{ url_for('static', filename='images/avatar/1.jpg') }}" alt=""></a>
                                                     </div>
-                                                </td>
-                                                <td> #5469 </td>
-                                                <td>  <span class="name">Louis Stanley</span> </td>
-                                                <td> <span class="product">iMax</span> </td>
-                                                <td><span class="count">231</span></td>
-                                                <td>
+                                                </td> -->
+                                                <!-- <td> #{{ point }} </td> -->
+                                                <td>  <span class="name">{{ point["name"] }}</span> </td>
+                                                <!-- <td> <span class="product">iMax</span> </td> -->
+                                                <td><span class="count">{{ point["population"] }}</span></td>
+                                                <!-- <td>
                                                     <span class="badge badge-complete">Complete</span>
-                                                </td>
+                                                </td> -->
                                             </tr>
-                                            <tr>
-                                                <td class="serial">2.</td>
-                                                <td class="avatar">
-                                                    <div class="round-img">
-                                                        <a href="#"><img class="rounded-circle" src="{{ url_for('static', filename='images/avatar/2.jpg') }}" alt=""></a>
-                                                    </div>
-                                                </td>
-                                                <td> #5468 </td>
-                                                <td>  <span class="name">Gregory Dixon</span> </td>
-                                                <td> <span class="product">iPad</span> </td>
-                                                <td><span class="count">250</span></td>
-                                                <td>
-                                                    <span class="badge badge-complete">Complete</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="serial">3.</td>
-                                                <td class="avatar">
-                                                    <div class="round-img">
-                                                        <a href="#"><img class="rounded-circle" src="{{ url_for('static', filename='images/avatar/3.jpg') }}" alt=""></a>
-                                                    </div>
-                                                </td>
-                                                <td> #5467 </td>
-                                                <td>  <span class="name">Catherine Dixon</span> </td>
-                                                <td> <span class="product">SSD</span> </td>
-                                                <td><span class="count">250</span></td>
-                                                <td>
-                                                    <span class="badge badge-complete">Complete</span>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="serial">4.</td>
-                                                <td class="avatar">
-                                                    <div class="round-img">
-                                                        <a href="#"><img class="rounded-circle" src="{{ url_for('static', filename='images/avatar/4.jpg') }}" alt=""></a>
-                                                    </div>
-                                                </td>
-                                                <td> #5466 </td>
-                                                <td>  <span class="name">Mary Silva</span> </td>
-                                                <td> <span class="product">Magic Mouse</span> </td>
-                                                <td><span class="count">250</span></td>
-                                                <td>
-                                                    <span class="badge badge-pending">Pending</span>
-                                                </td>
-                                            </tr>
-                                            <tr class=" pb-0">
-                                                <td class="serial">5.</td>
-                                                <td class="avatar pb-0">
-                                                    <div class="round-img">
-                                                        <a href="#"><img class="rounded-circle" src="{{ url_for('static', filename='images/avatar/6.jpg') }}" alt=""></a>
-                                                    </div>
-                                                </td>
-                                                <td> #5465 </td>
-                                                <td>  <span class="name">Johnny Stephens</span> </td>
-                                                <td> <span class="product">Monitor</span> </td>
-                                                <td><span class="count">250</span></td>
-                                                <td>
-                                                    <span class="badge badge-complete">Complete</span>
-                                                </td>
-                                            </tr>
+                                            {% endfor %}
                                         </tbody>
                                     </table>
                                 </div> <!-- /.table-stats -->
@@ -291,13 +235,14 @@
                     <div class="col-xl-4">
                         <div class="row">
                             <div class="col-lg-6 col-xl-12">
-                                <div class="card br-0">
+                                <!-- <div class="card br-0">
                                     <div class="card-body">
                                         <div class="chart-container ov-h">
                                             <div id="flotPie1" class="float-chart"></div>
                                         </div>
                                     </div>
-                                </div><!-- /.card -->
+                                </div> -->
+                                <!-- /.card -->
                             </div>
 
                             <div class="col-lg-6 col-xl-12">
@@ -320,7 +265,7 @@
 
 
             <!-- To Do and Live Chat -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
@@ -374,21 +319,24 @@
                                             </ul>
                                         </div>
                                     </div>
-                                </div> <!-- /.todo-list -->
-                            </div>
-                        </div> <!-- /.card-body -->
-                    </div><!-- /.card -->
-                </div>
+                                </div> -->
+                                <!-- /.todo-list -->
+                            <!-- </div>
+                        </div> -->
+                         <!-- /.card-body -->
+                    <!-- </div> -->
+                    <!-- /.card -->
+                <!-- </div> -->
 
-                <div class="col-lg-6">
+                <!-- <div class="col-lg-6">
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title box-title">Live Chat</h4>
                             <div class="card-content">
                                 <div class="messenger-box">
                                     <ul>
-                                        <li>
-                                            <div class="msg-received msg-container">
+                                        <li> -->
+                                            <!-- <div class="msg-received msg-container">
                                                 <div class="avatar">
                                                    <img src="{{ url_for('static', filename='images/avatar/64-1.jpg') }}" alt="">
                                                    <div class="send-time">11.11 am</div>
@@ -403,10 +351,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div><!-- /.msg-received -->
-                                        </li>
-                                        <li>
-                                            <div class="msg-sent msg-container">
+                                            </div> -->
+                                            <!-- /.msg-received -->
+                                        <!-- </li>
+                                        <li> -->
+                                            <!-- <div class="msg-sent msg-container">
                                                 <div class="avatar">
                                                    <img src="{{ url_for('static', filename='images/avatar/64-2.jpg') }}" alt="">
                                                    <div class="send-time">11.11 am</div>
@@ -421,8 +370,9 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div><!-- /.msg-sent -->
-                                        </li>
+                                            </div> -->
+                                            <!-- /.msg-sent -->
+                                        <!-- </li>
                                     </ul>
                                     <div class="send-mgs">
                                         <div class="yourmsg">
@@ -432,13 +382,17 @@
                                             <i class="pe-7f-paper-plane"></i>
                                         </button>
                                     </div>
-                                </div><!-- /.messenger-box -->
-                            </div>
-                        </div> <!-- /.card-body -->
-                    </div><!-- /.card -->
-                </div>
+                                </div> -->
+                                <!-- /.messenger-box -->
+                            <!-- </div>
+                        </div>  -->
+                        <!-- /.card-body -->
+                    <!-- </div> -->
+                    <!-- /.card -->
+                <!-- </div> -->
 
-            </div> <!-- /.row -->
+            <!-- </div>  -->
+            <!-- /.row -->
             <!-- To Do and Live Chat End -->
 
 
@@ -446,26 +400,28 @@
 
 
             <!-- Calender Chart Weather  -->
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-12 col-lg-4">
                     <div class="card">
-                        <div class="card-body">
+                        <div class="card-body"> -->
                             <!-- <h4 class="box-title">Chandler</h4> -->
-                            <div class="calender-cont widget-calender">
+                            <!-- <div class="calender-cont widget-calender">
                                 <div id="calendar"></div>
                             </div>
                         </div>
-                    </div><!-- /.card -->
-                </div>
+                    </div> -->
+                    <!-- /.card -->
+                <!-- </div>
 
                 <div class="col-lg-4 col-md-6">
                     <div class="card ov-h">
                         <div class="card-body bg-flat-color-2">
                             <div id="flotBarChart" class="float-chart ml-4 mr-4"></div>
                         </div>
-                        <div id="cellPaiChart" class="float-chart"></div>
-                    </div><!-- /.card -->
-                </div>
+                        <div id="cellPaiChart" class="float-chart"></div> -->
+                    <!-- </div> -->
+                    <!-- /.card -->
+                <!-- </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="card weather-box">
                         <h4 class="weather-title box-title">Weather</h4>
@@ -473,10 +429,12 @@
                             <div class="weather-widget">
                                 <div id="weather-one" class="weather-one"></div>
                             </div>
-                        </div>
-                    </div><!-- /.card -->
-                </div>
-            </div><!-- /.row -->
+                        </div> -->
+                    <!-- </div> -->
+                    <!-- /.card -->
+                <!-- </div> -->
+            <!-- </div> -->
+            <!-- /.row -->
             <!-- Calender Chart Weather  End -->
 
 
@@ -588,6 +546,8 @@
                   }
                   return color;
             }
+
+            // gets the top counties and their waterpoint usages
             var counties_waterpoints = {{counties_waterpoints|tojson}};
             for ( var i = 0; i < counties_waterpoints.length; i++ ){
               var obj = counties_waterpoints[i];

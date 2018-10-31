@@ -23,8 +23,9 @@ def index():
     searchForm = SearchForm()
     number_of_counties = len(all_counties)
     number_of_waterpoints = len(all_waterpoints)
-
-
+    print(counties_waterpoints)
+    for x in counties_waterpoints:
+        print(counties_waterpoints[x])
     return render_template('index.html', points={"data":known_waterpoints},
         number_of_counties=number_of_counties, number_of_waterpoints=number_of_waterpoints,
         total_population = total_population, counties_waterpoints=counties_info,
