@@ -69,6 +69,8 @@
     <script>
     // Initialize and add the map
     var red_marker = "https://storage.googleapis.com/support-kms-prod/SNP_2752125_en_v0";
+    var blue_marker = "https://maps.gstatic.com/intl/en_us/mapfiles/markers2/measle_blue.png";
+
     var icons = {
       location: {
         icon: red_marker,
@@ -112,6 +114,15 @@
         })(newMarker, locationName, infoWindow));
 
       }
+
+      var location = {{ suitable_point|tojson }};
+      var position = {lat: location[0], lng: location[1]};
+
+      var locationName = "most recommended position";
+
+      var newMarker = new google.maps.Marker({
+        position: position, map: map, clickable: true
+      });
 
     }
     </script>

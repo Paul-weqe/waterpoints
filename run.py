@@ -63,7 +63,8 @@ def google_maps():
     # all_waterpoints = all_waterpoints
     # all_waterpoint_locations = all_waterpoint_locations
     return render_template("maps-gmap.html", central_point_json=central_point_json,
-            all_waterpoint_locations=all_waterpoint_locations, searchForm=searchForm)
+            all_waterpoint_locations=all_waterpoint_locations, searchForm=searchForm,
+            suitable_point=suitable_point)
 
 
 # @app.route('/')

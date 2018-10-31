@@ -4,12 +4,15 @@ from calculations import get_distance
 from statistics import variance
 import pandas as pd
 import statistics as st
+import numpy as np
 #req = requests.get("https://kenya-rapid-app-server-dev.mybluemix.net/waterpoints")
 #json_data = req.json()
 
 json_file = open("data.json", "r")
 json_data = json_file.read()
 json_data = json.loads(json_data)
+lats = []
+lons = []
 
 all_waterpoints = [] # lists all waterpoints available
 all_waterpoint_locations = []
@@ -37,11 +40,11 @@ waterpoints_distances  = {
 }
 """
 
-
 # adds to the waterpoints list only the points in which we have the longitude and latitude
 for x in json_data["data"]:
     if 'lon' in x and 'lat' in x:
-        known_waterpoints.append(x)
+        if x['lon'] > 37.60305827189648 and x['lat'] > 0.3610877866467687:
+            known_waterpoints.append(x)
     else:
         unknown_waterpoints.append(x)
     all_waterpoints.append(x)
@@ -188,8 +191,8 @@ def reduce_datapoints_distances():
     for point in all_waterpoint_locations:
         lons.append(point["lon"])
 
-    print(st.variance(lats))
-    print(st.variance(lons))
+    # print(st.variance(lons))
+    # print(st.variance(lats))
 
 reduce_datapoints_distances()
 total_population += get_population()
@@ -203,4 +206,33 @@ get_closest_waterpoints()
 #     print(x)
 #     print("############")
 
-# print(all_waterpoint_locations)
+
+
+for waterpoint in known_waterpoints:
+    lons.append(waterpoint['lon'])
+    lats.append(waterpoint['lat'])
+    # print(known_waterpoints[waterpoint])
+
+lons.sort()
+lats.sort()
+
+
+lonArr = np.array(lons)     # creates a numpy array for the longitudes
+latArr = np.array(lats)     # creates a numpy array for the latitudes
+
+lonDiff = np.diff(lonArr)   # creates a numpy array with the differences of all the longitudes
+latDiff = np.diff(latArr)   # creates a numpy array with the differences of all the latitudes
+
+max_lonDiff = max(lonDiff)  # largest difference in the longitudes (disparity in longitudes between the waterpoints)
+max_latDiff = max(latDiff)  # largest difference in the latitudes (disparity in latitudes between the waterpoints)
+
+lon_index = np.where(lonDiff==max_lonDiff)[0][0]
+lat_index = np.where(latDiff==max_latDiff)[0][0]
+
+
+lon_disp = (lonArr[lon_index] + lonArr[lon_index - 1]) / 2
+lat_disp = (latArr[lat_index] + latArr[lat_index - 1]) / 2
+
+suitable_point = [lat_disp, lon_disp]
+print(suitable_point)
+# print(suitable_point)
