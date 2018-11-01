@@ -85,5 +85,9 @@ def chart_js():
     searchForm = SearchForm()
     return render_template("charts-chartjs.html", searchForm=searchForm)
 
+@app.errorhandler(404)
+def page_404(e):
+    return render_template('404.html'), 404
+
 if __name__ == "__main__":
     app.run(debug=True)
