@@ -49,7 +49,9 @@ def waterpoint_info(waterpoint_id):
 
 @app.route("/basic-tables")
 def basic_tables():
-    return render_template("tables-basic.html")
+    searchForm = SearchForm()
+    return render_template("tables-basic.html", waterpoints_distances=waterpoints_distances,
+    id_name_mapping=id_name_mapping, searchForm=searchForm)
 
 
 @app.route('/data-tables')

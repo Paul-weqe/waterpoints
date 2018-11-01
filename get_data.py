@@ -26,7 +26,8 @@ active = 0
 counties_waterpoints = {}
 all_wards = []
 central_point = []
-waterpoints_distances = {}
+id_name_mapping = {}
+# waterpoints_distances = {}
 
 waterpoints_info = [] # holds triples of lat, lon and id
 waterpoints_distances = {}
@@ -63,6 +64,11 @@ for x in known_waterpoints:
     all_waterpoint_locations.append(data)
 
 
+for point in all_waterpoints:
+    if 'id' in point and 'name' in point:
+        id_name_mapping[point['id']] = point['name']
+
+# print(id_name_mapping)
 waterpoint_quality = {
     'good': 0,
     'bad': 0,
@@ -108,6 +114,8 @@ def get_closest_waterpoints():
                 elif distance < waterpoints_distances[ str(point[2]) ][1]:
                     waterpoints_distances[str(point[2])] = [another_point[2], distance]
 
+get_closest_waterpoints()
+# print(all_waterpoints)
 
 # gets the average distance between each of the waterpoints that have been mentioned
 def get_average_closest_distance():
@@ -234,5 +242,5 @@ lon_disp = (lonArr[lon_index] + lonArr[lon_index - 1]) / 2
 lat_disp = (latArr[lat_index] + latArr[lat_index - 1]) / 2
 
 suitable_point = [lat_disp, lon_disp]
-print(suitable_point)
-# print(suitable_point)
+
+# print(waterpoints_distances)
